@@ -5,3 +5,15 @@
  * Definição dos esquemas para serem utilizadas na Base de Dados (MongoDb)
  * Data: 11/032020
  */
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const CadastroSchema = new Schema({
+    nome: String,
+    telefone: String,
+    midia: String,
+    social: Array
+})
+
+module.exports = mongoose.model('Cadastro', CadastroSchema);

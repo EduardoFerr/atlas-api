@@ -9,16 +9,34 @@
 //Base do Setup da Aplicação:
  
 /* Chamada das Packages que iremos precisar para a nossa aplicação */
-var express     = require('express'); //chamando o pacote express
-var app         = express(); //definção da nossa aplicação através do express
-var bodyParser  = require('body-parser');  //chamando o pacote body-parser
-var cors = require('cors') //chamando o pacote de cors
+const express     = require('express'); //chamando o pacote express
+const app         = express(); //definção da nossa aplicação através do express
+const bodyParser  = require('body-parser');  //chamando o pacote body-parser
+const cors = require('cors') //chamando o pacote de cors
 //Configuração Base da Aplicação:
 //========================================================================
-var mongoose = require('mongoose');
+const Cadastro = require('./app/models/cadastro');
 
-//mongoose.connect('mongodb://root:123456@jello.modulusmongo.net:27017/ity3Ryje');
-mongoose.connect('mongodb+srv://admin:admin12345@atlasteste-fmbud.mongodb.net/test?retryWrites=true&w=majority');
+const mongoose = require('mongoose');
+mongoose
+  .connect(
+    "mongodb+srv://admin:admin12345@atlasteste-fmbud.mongodb.net/test?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useFindAndModify: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true
+    }
+  )
+  .then(
+    () => {
+      console.log("Mongodb conectado!");
+    },
+    err => {
+      console.error("Erro de conexão no database", err);
+    }
+  );
+
 
 /** Configuração da variável 'app' para usar o 'bodyParser()'.
  * Ao fazermos isso nos permitirá retornar os dados a partir de um POST
@@ -37,19 +55,18 @@ var porta = process.env.PORT || 8080;
 var router  = express.Router(); 
  
 /* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
-router.get('/', function(req, res) {
+router.get('/documentacao', function(req, res) {
     res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
 });
+router.get('/', function(req = "req nada", res = "res nada") {
+    res.json({ message: 'Raiz' });
+})
  
 /* TODO - Definir futuras rotas aqui!!! */
  
 /* Todas as nossas rotas serão prefixadas com '/api' */
 app.use('/api', router);
-app.use('/', function(req = "req nada", res = "res nada") {
-    console.log(req);
-    console.log(res);
-    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
-});
+app.use('/', router);
  
 //Iniciando o Servidor (Aplicação):
 //==============================================================
