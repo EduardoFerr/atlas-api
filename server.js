@@ -61,6 +61,9 @@ router.get('/documentacao', function(req, res) {
 router.get('/', function(req = "req nada", res = "res nada") {
     res.json({ message: 'Raiz' });
 })
+router.get('/cadastro', function(req, res) {
+    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
+});
  
 /* TODO - Definir futuras rotas aqui!!! */
  
