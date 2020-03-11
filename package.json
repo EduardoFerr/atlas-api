@@ -8,8 +8,9 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
-  "dependencies": {
+  "devDependencies": {
     "body-parser": "~1.0.1",
+    "cors": "^2.8.5",
     "express": "~4.0.0",
     "mongoose": "*",
     "request": "^2.74.0"
