@@ -11,7 +11,7 @@ module.exports = {
             res.status(500).send(err);
         }
     },
-    cadastrar: (req, res, next) => {
+    adicionar: async (req, res, next) => {
         const cadastro = new cadastroModel(req.body);
         
         try {
