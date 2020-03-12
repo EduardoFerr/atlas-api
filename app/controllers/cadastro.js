@@ -11,6 +11,7 @@ module.exports = {
             res.status(500).send(error);
         }
     },
+<<<<<<< HEAD
     buscarPorId: async (req, res, next) => {
         try{
             const cadastro = await cadastroModel.findById(req.params.id);
@@ -20,6 +21,8 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+=======
+>>>>>>> 1d069ceaf7e9ca0433d9c9862e949ef58a4a70fe
     adicionar: async (req, res, next) => {
         const cadastro = new cadastroModel(req.body);
         

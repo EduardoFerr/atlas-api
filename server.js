@@ -10,14 +10,17 @@
  
 /* Chamada das Packages que iremos precisar para a nossa aplicação */
 const express     = require('express'); //chamando o pacote express
-const app         = express(); //definção da nossa aplicação através do express
 const bodyParser  = require('body-parser');  //chamando o pacote body-parser
-const cors = require('cors'); //chamando o pacote de cors
-const cadastro = require('./rotas/cadastro'); //chamando sistema de rotas
+const cors        = require('cors'); //chamando o pacote de cors
+const cadastro    = require('./rotas/cadastro'); //chamando sistema de rotas
 
 //Configuração Base da Aplicação:
 //========================================================================
+const app         = express(); //definção da nossa aplicação através do express
+//configuração do database
+const mongoose = require('./config/database');
 
+<<<<<<< HEAD
 const mongoose = require('mongoose');
 mongoose
   .connect(
@@ -37,6 +40,10 @@ mongoose
       console.error("Erro de conexão no database", err);
     }
   );
+=======
+//conexão para o mongodb
+mongoose.connection.on('error', console.error.bind(console, 'Erro de conexão do MongoDB:'));
+>>>>>>> 1d069ceaf7e9ca0433d9c9862e949ef58a4a70fe
 
 
 /** Configuração da variável 'app' para usar o 'bodyParser()'.
@@ -53,25 +60,23 @@ var porta = process.env.PORT || 8080;
 //==============================================================
  
 /* Aqui o 'router' irá pegar as instâncias das Rotas do Express */
-var router  = express.Router(); 
+//var router  = express.Router(); 
 
 /* Middleware para usar em todos os requests enviados para a nossa API- Mensagem Padrão */
-router.use((req, res, next) => {
-    console.log('Algo está acontecendo aqui........');
-    next(); //aqui é para sinalizar de que prosseguiremos para a próxima rota. E que não irá parar por aqui!!!
-});
+
 
 /* Todas as nossas rotas serão prefixadas com '/api' */
 //app.use('/api', router);
-//app.use('/', router);
+//app.use('/', cadastro);
 //rota pública
 app.use('/', cadastro);
 
 /* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
-router.get('/', (req = "req nada", res = "res nada") => {
+/*
+router.get('/', (req, res) => {
     res.json({ message: 'Raiz' });
 })
-
+*/
 /* TODO - Definir futuras rotas aqui!!! */
  
 //Iniciando o Servidor (Aplicação):
