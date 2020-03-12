@@ -24,7 +24,7 @@ mongoose
     "mongodb+srv://admin:admin12345@atlasteste-fmbud.mongodb.net/test?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useCreateIndex: true,
       useUnifiedTopology: true
     }
@@ -65,7 +65,7 @@ router.use((req, res, next) => {
 //app.use('/api', router);
 //app.use('/', router);
 //rota pública
-app.use('/cadastro', cadastro);
+app.use('/', cadastro);
 
 /* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
 router.get('/', (req = "req nada", res = "res nada") => {

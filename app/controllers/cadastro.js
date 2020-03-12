@@ -8,30 +8,47 @@ module.exports = {
         try {
             res.send(cadastro);
         } catch (error) {
-            res.status(500).send(err);
+            res.status(500).send(error);
         }
     },
-    cadastrar: (req, res, next) => {
+    buscarPorId: async (req, res, next) => {
+        try{
+            const cadastro = await cadastroModel.findById(req.params.id);
+            res.send(cadastro)
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
+    },
+    adicionar: async (req, res, next) => {
         const cadastro = new cadastroModel(req.body);
         
         try {
             await cadastro.save()
         } catch (error) {
-            res.status(500).send(err)
+            res.status(500).send(error)
         }
     },
-    /*
-    cadastrar: (req, res, next) => {
-        cadastroModel.create({
-                nome: req.body,nome,
-                telefone: req.body.telefone,
-                midia: req.body.midia,
-                social: req.body.social
-        })
+    atualizar: async (req, res, next) => {
+        try {
+            await cadastroModel.findByIdAndUpdate(req.params.id, req.body)
+            await cadastroModel.update()
+            res.status(200).send()
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     },
-    */
-    atualizar: (req, res, next) => {},
-    deletar: (req, res, next) => {}
+    deletar: async (req, res, next) => {
+        try {
+            const cadastro = await cadastroModel.findByIdAndDelete(req.params.id)
+
+            if (!cadastro) res.status(404).send("Cadastro não foi encontrado")
+            res.status(200).send()
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    }
 
 
 }
