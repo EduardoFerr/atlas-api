@@ -20,30 +20,8 @@ const app         = express(); //definção da nossa aplicação através do exp
 //configuração do database
 const mongoose = require('./config/database');
 
-<<<<<<< HEAD
-const mongoose = require('mongoose');
-mongoose
-  .connect(
-    "mongodb+srv://admin:admin12345@atlasteste-fmbud.mongodb.net/test?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-      useUnifiedTopology: true
-    }
-  )
-  .then(
-    () => {
-      console.log("Mongodb conectado!");
-    },
-    err => {
-      console.error("Erro de conexão no database", err);
-    }
-  );
-=======
 //conexão para o mongodb
 mongoose.connection.on('error', console.error.bind(console, 'Erro de conexão do MongoDB:'));
->>>>>>> 1d069ceaf7e9ca0433d9c9862e949ef58a4a70fe
 
 
 /** Configuração da variável 'app' para usar o 'bodyParser()'.
