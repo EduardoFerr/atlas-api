@@ -53,26 +53,32 @@ var porta = process.env.PORT || 8080;
  
 /* Aqui o 'router' irá pegar as instâncias das Rotas do Express */
 var router  = express.Router(); 
- 
-/* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
-router.get('/documentacao', function(req, res) {
-    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
+
+/* Middleware para usar em todos os requests enviados para a nossa API- Mensagem Padrão */
+router.use((req, res, next) => {
+    console.log('Algo está acontecendo aqui........');
+    next(); //aqui é para sinalizar de que prosseguiremos para a próxima rota. E que não irá parar por aqui!!!
 });
-router.get('/', function(req = "req nada", res = "res nada") {
+
+/* Todas as nossas rotas serão prefixadas com '/api' */
+app.use('/api', router);
+app.use('/', router);
+
+/* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
+router.get('/', (req = "req nada", res = "res nada") => {
     res.json({ message: 'Raiz' });
 })
-router.get('/cadastro', function(req, res) {
+router.get('/documentacao', (req, res) => {
+    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
+});
+router.get('/cadastro', (req, res) => {
     res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
 });
  
 /* TODO - Definir futuras rotas aqui!!! */
  
-/* Todas as nossas rotas serão prefixadas com '/api' */
-app.use('/api', router);
-app.use('/', router);
- 
 //Iniciando o Servidor (Aplicação):
 //==============================================================
-app.listen(porta, function () {
+app.listen(porta, () => {
     console.log(`Servidor escutando na porta ${porta}.`);
 });
