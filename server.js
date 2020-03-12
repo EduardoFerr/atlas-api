@@ -12,10 +12,11 @@
 const express     = require('express'); //chamando o pacote express
 const app         = express(); //definção da nossa aplicação através do express
 const bodyParser  = require('body-parser');  //chamando o pacote body-parser
-const cors = require('cors') //chamando o pacote de cors
+const cors = require('cors'); //chamando o pacote de cors
+const cadastro = require('./rotas/cadastro'); //chamando sistema de rotas
+
 //Configuração Base da Aplicação:
 //========================================================================
-const Cadastro = require('./app/models/cadastro');
 
 const mongoose = require('mongoose');
 mongoose
@@ -61,20 +62,16 @@ router.use((req, res, next) => {
 });
 
 /* Todas as nossas rotas serão prefixadas com '/api' */
-app.use('/api', router);
-app.use('/', router);
+//app.use('/api', router);
+//app.use('/', router);
+//rota pública
+app.use('/cadastro', cadastro);
 
 /* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8080/api) */
 router.get('/', (req = "req nada", res = "res nada") => {
     res.json({ message: 'Raiz' });
 })
-router.get('/documentacao', (req, res) => {
-    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
-});
-router.get('/cadastro', (req, res) => {
-    res.json({ message: 'YEAH! Seja Bem-Vindo a nossa API' });
-});
- 
+
 /* TODO - Definir futuras rotas aqui!!! */
  
 //Iniciando o Servidor (Aplicação):
