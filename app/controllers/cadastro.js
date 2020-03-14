@@ -21,7 +21,7 @@ module.exports = {
         }
     },
     adicionar: async (req, res, next) => {
-        const cadastro = new cadastroModel(req.body);
+        const cadastro = new cadastroModel(JSON.parse(req.body));
         
         try {
             await cadastro.save()
