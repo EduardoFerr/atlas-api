@@ -23,7 +23,8 @@ module.exports = {
      adicionar: async (req, res, next) => {
         console.log(req.body)
         const cadastro = new cadastroModel(req.body);
-        
+        console.log(cadastro)
+
         try {
             //await cadastro.save()
             
