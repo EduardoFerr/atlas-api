@@ -33,7 +33,7 @@ module.exports = {
                 if (err)
                     res.json(err);
                 res.json({
-                    message: 'Novo cadastro adicionado!',
+                    mensagem: 'Novo cadastro adicionado!',
                     data: cadastro
                 });
             });
