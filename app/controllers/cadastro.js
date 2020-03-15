@@ -33,28 +33,13 @@ module.exports = {
                 if (err)
                     res.json(err);
                 res.json({
-                    mensagem: 'Novo cadastro adicionado!',
+                    mensagem: 'Novo contato adicionado!',
                     data: cadastro
                 });
             });
             
             
             
-        } catch (error) {
-            res.status(500).send(error)
-        }
-    },
-    
-    
-    
-
-    
-    adicionar2: async (req, res, next) => {
-        console.log(req.body)
-        const cadastro = new cadastroModel(req.body);
-        
-        try {
-            await cadastro.save()
         } catch (error) {
             res.status(500).send(error)
         }
