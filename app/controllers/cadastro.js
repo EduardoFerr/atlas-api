@@ -20,7 +20,35 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    adicionar: async (req, res, next) => {
+     adicionar: async (req, res, next) => {
+        console.log(req.body)
+        const cadastro = new cadastroModel(req.body);
+        
+        try {
+            await cadastro.save()
+            
+            
+            await cadastro.save(function (err) {
+                if (err)
+                    res.json(err);
+                res.json({
+                    message: 'Novo cadastro adicionado!',
+                    data: cadastro
+                });
+            });
+            
+            
+            
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    },
+    
+    
+    
+
+    
+    adicionar2: async (req, res, next) => {
         console.log(req.body)
         const cadastro = new cadastroModel(req.body);
         
