@@ -25,7 +25,7 @@ module.exports = {
         const cadastro = new cadastroModel(req.body);
         
         try {
-            await cadastro.save()
+            //await cadastro.save()
             
             
             await cadastro.save(function (err) {
